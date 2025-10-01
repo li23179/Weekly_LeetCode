@@ -10,6 +10,10 @@ class Solution:
         # Easier to use BFS to traversal than DFS
         # since we append the node to our result level by level
 
+
+        # Method 1: add all the node normally then check is it leftToRight
+        # if leftToRight: append the level
+        # if not reverse the level (so it will be the same)
         if not root:
             return []    
     
@@ -32,6 +36,9 @@ class Solution:
                 # append this value to the current level
                 level.append(node.val)
             
+            # check the flag is it leftToRight:
+            # if true then normal BFS order
+            # if not then the level order is reversed
             if leftToRight:
                 res.append(level)
             else:
