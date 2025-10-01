@@ -7,13 +7,13 @@
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         
-        # Easier to use BFS to traversal than DFS
+        # Easier to use BFS to traversal than DFS (Intuitively)
         # since we append the node to our result level by level
+        
+        # We know that once we have apppended the current level
+        # our next level traversal needs to be in reverse order
+        # we can use a flag to toggle the order of traversal
 
-
-        # Method 1: add all the node normally then check is it leftToRight
-        # if leftToRight: append the level
-        # if not reverse the level (so it will be the same)
         if not root:
             return []    
     
