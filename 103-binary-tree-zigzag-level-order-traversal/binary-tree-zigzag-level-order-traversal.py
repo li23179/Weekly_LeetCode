@@ -7,24 +7,31 @@
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         
-        if not root:
-            return []
+        # Easier to use BFS to traversal than DFS
+        # since we append the node to our result level by level
 
+        if not root:
+            return []    
+    
         queue = collections.deque([root])
-        res = []
         leftToRight = True
+        res = []
 
         while queue:
-
+            
             level = []
+
             for _ in range(len(queue)):
-
+                # queue FIFO: (First In First Out)
                 node = queue.popleft()
-
-                level.append(node.val)
+                
+                # add the left and right child to the queue (next level)
                 queue.append(node.left) if node.left else None
                 queue.append(node.right) if node.right else None
 
+                # append this value to the current level
+                level.append(node.val)
+            
             if leftToRight:
                 res.append(level)
             else:
@@ -33,4 +40,3 @@ class Solution:
             leftToRight = not leftToRight
 
         return res
-                
