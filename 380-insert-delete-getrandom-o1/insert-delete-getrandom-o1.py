@@ -25,7 +25,7 @@ class RandomizedSet:
         self.pos[last] = i
 
         self.arr.pop()
-        del self.pos[val]
+        self.pos.pop(val)
 
         self.len -= 1
         return True
