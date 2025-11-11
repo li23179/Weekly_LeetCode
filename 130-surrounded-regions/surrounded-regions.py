@@ -33,15 +33,14 @@ class Solution:
                     dfs(r,c)
 
         # change all the 'O's into 'X'
+        # change all the 'T's back to 'O'
         for r in range(ROWS):
             for c in range(COLS):
                 if board[r][c] == 'O':
                     board[r][c] = 'X'
-        # change all the 'T's back to 'O'
-        for r in range(ROWS):
-            for c in range(COLS):
-                if board[r][c] == 'T':
+                elif board[r][c] == 'T':
                     board[r][c] = 'O'
+        
 
                 
         
