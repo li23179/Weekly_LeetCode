@@ -40,6 +40,7 @@ class LRUCache:
         if not key in self.cache:
             return -1
 
+        # we update the key as mru 
         self.remove(self.cache[key])
         self.insert(self.cache[key])
         return self.cache[key].val
