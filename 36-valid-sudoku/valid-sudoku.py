@@ -1,31 +1,27 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-
-        # if the current board value is seen in row, column or box then invalid
-        ROWS, COLS = len(board), len(board[0])
-
-        # check the row and column and the 3x3 sub-boxes
-        # we can use row % 3 and col % 3 to find the corresponding box
-        rows = [set() for _ in range(9)]
-        columns = [set() for _ in range(9)]
-        boxes = [set() for _ in range(9)]
-
+        ROWS = len(board)
+        COLS = len(board[0])
+        # check row
+        rows_set = [set() for _ in range(9)] 
+        # check col
+        cols_set = [set() for _ in range(9)]
+        # check block, (r, c) => (1, 1)
+        blocks_set = [set() for _ in range(9)]
+        
         for r in range(ROWS):
             for c in range(COLS):
-                
-                if board[r][c] == '.':
+                if (board[r][c] == '.'):
                     continue
+                block_index = 3 * (r // 3) + (c // 3)
 
-                boxIdx = (r // 3) * 3 + (c // 3) 
-                # determine whether we have seen this element:
-                if (board[r][c] in rows[r] or
-                    board[r][c] in columns[c] or
-                    board[r][c] in boxes[boxIdx]):
-
+                if (board[r][c] in rows_set[r] or
+                    board[r][c] in cols_set[c] or
+                    board[r][c] in blocks_set[block_index]):
                     return False
                 
-                rows[r].add(board[r][c])
-                columns[c].add(board[r][c])
-                boxes[boxIdx].add(board[r][c])
-        
+                rows_set[r].add(board[r][c])
+                cols_set[c].add(board[r][c])
+                blocks_set[block_index].add(board[r][c])
+
         return True
