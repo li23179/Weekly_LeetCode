@@ -1,9 +1,5 @@
 class Solution:
-    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
-        # base case: if the length of s1 + s2 != s3 impossible 
-        if len(s1) + len(s2) != len(s3):
-            return False
-
+    def top_down(self, s1: str, s2: str, s3: str) -> bool:
         dp = {}
         def dfs(i, j):
             # base case: if we used up all the char
@@ -30,5 +26,12 @@ class Solution:
             return False
         
         return dfs(0, 0)
+
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        # base case: if the length of s1 + s2 != s3 impossible 
+        if len(s1) + len(s2) != len(s3):
+            return False
+        
+        return self.top_down(s1, s2, s3)
 
             
