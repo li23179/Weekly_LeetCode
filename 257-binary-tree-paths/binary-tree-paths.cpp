@@ -11,29 +11,31 @@
  */
 class Solution {
 public:
-    void dfs(TreeNode* node, string path, vector<string> &res){
-        // Base case: if we hit the nullptr -> return the string
-        if (!node){
-            return;
-        }
-
-        // add the current node to the path
-        path += to_string(node->val);
-
-        if (!node->left && !node->right){
-            res.push_back(path);
-            return;
-        }
-
-        path += "->";
-
-        dfs(node->left, path, res);
-        dfs(node->right, path, res);
-    }
 
     vector<string> binaryTreePaths(TreeNode* root) {
         vector<string> res;
-        dfs(root, "", res);
+        stack<pair<TreeNode*, string>> st;
+        st.push({root, to_string(root->val)});
+        
+        while (!st.empty()){
+            TreeNode* node = st.top().first;
+            string path = st.top().second;
+            st.pop();
+
+            if (!node->left && !node->right){
+                res.push_back(path);
+            }
+
+            if (node->right){
+                st.push({node->right, path + "->" + to_string(node->right->val)});
+            }
+
+            if (node->left){
+                st.push({node->left, path + "->" + to_string(node->left->val)});
+            }
+        }
+
         return res;
+
     }
 };
