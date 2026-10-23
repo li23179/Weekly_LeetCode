@@ -11,23 +11,30 @@
  */
 class Solution {
 public:
-    vector<int> res;
-    
-    void dfs(TreeNode* node){
-        if (!node){
-            return;
+    vector<int> preorderTraversal(TreeNode* root) {
+        // push the root node first -> then push right and left onto the stack
+        if (!root) return {};
+        
+        stack<TreeNode*> st;
+        vector<int> res;
+        st.push(root);
+
+        while (!st.empty()){
+            // pop the top then push right and left
+            TreeNode* node = st.top();
+            st.pop();
+
+            if (node->right){
+                st.push(node->right);
+            }
+            
+            if (node->left){
+                st.push(node->left);
+            }
+
+            res.push_back(node->val);
         }
 
-        res.push_back(node->val);
-        dfs(node->left);
-        dfs(node->right);
-        
-        return;
-    }
-    
-    vector<int> preorderTraversal(TreeNode* root) {
-        // mid left right
-        dfs(root);
         return res;
     }
 };
