@@ -7,19 +7,10 @@ public:
         int l = 0;
         int n = nums.size();
 
-        while (l < n){
-            // locate the zero
-            while (l < n && nums[l] != 0){
-                l++;
-            }
-
-            int r = l + 1;
-            while (r < n && nums[r] == 0){
-                r++;
-            }
-
-            if (r >= n) break;
-            swap(nums[l],  nums[r]);
+        for (int r = 0; r < n; r++){
+            // locate non-zero element
+            if (nums[r] == 0) continue;
+            swap(nums[l], nums[r]);
             l++;
         }
     }
