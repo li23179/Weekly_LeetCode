@@ -18,20 +18,14 @@ public:
             word2_count[word2[i]-'a']++;
         }
 
-        vector<int> freq_count(word1.length() + 1, 0);
-        // need to transform it with all existing char
-        // uau ssx
-        // [2, 1] [2, 1]
-        for (int i = 0; i < 26; i++){
-            // check existence of whether do we have this char
-            if (word1_count[i] != 0 && word2_count[i] == 0 ||
-                word2_count[i] != 0 && word1_count[i] == 0) return false;
-            int freq1 = word1_count[i];
-            int freq2 = word2_count[i];
-            freq_count[freq1]++;
-            freq_count[freq2]--;
+        for (int i = 0; i < 26; i++) {
+            if ((word1_count[i] == 0) != (word2_count[i] == 0))
+                return false;
         }
 
-        return all_of(freq_count.begin(), freq_count.end(), [](int x){ return x == 0; });
+        sort(word1_count.begin(), word1_count.end());
+        sort(word2_count.begin(), word2_count.end());
+
+        return word1_count == word2_count;
     }
 };
