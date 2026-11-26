@@ -1,26 +1,18 @@
 class Solution {
 public:
     string removeStars(string s) {
-        // "leet**cod*e" -> "lecoe"
+        // "lecoe*cod*e" -> "lecoe"
+        //      j    i
         // use a stack to store char, when we met it pop the top
-        stack<char> st;
-
+        int j = 0;
         for (int i = 0; i < s.length(); i++){
-            if (s[i] != '*'){
-                st.push(s[i]);
+            if (s[i] == '*'){
+                j--;
             } else {
-                st.pop();
+                s[j++] = s[i];
             }
         }
-
-        string res = "";
         
-        while(!st.empty()){
-            res += st.top();
-            st.pop();
-        }
-
-        reverse(res.begin(), res.end());
-        return res;
+        return s.substr(0,j);
     }
 };
